@@ -1,0 +1,24 @@
+# Ignore Pycache Folder
+**/__pycache__
+
+# Ignore Migrations
+**/migrations/*
+
+# Ignore .pyc
+*.pyc
+
+#Ignore Media Folder
+**/media/*
+!**/media/__init__.py
+# Ignore IDE specific folder
+**/.idea
+**/.vscode
+
+# Ignore DB
+*.sqlite3
+
+# Ignore Secret Key
+**/sk.txt
+
+# Ignore Video Folder
+video/

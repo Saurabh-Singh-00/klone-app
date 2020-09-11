@@ -1,0 +1,326 @@
+// User profile
+url: http://127.0.0.1:8000/api/v1/user-profile/9/
+// Result
+{
+    "id": 9,
+    "username": "pankaj",
+    "first_name": "Pankaj",
+    "last_name": "Chaurasia",
+    "email": "pankaj@gmail.com",
+    "dob": null,
+    "profile": {
+        "url": "http://127.0.0.1:8000/api/v1/user-profile/9/profile/9/",
+        "followers_count": 1,
+        "following_count": 1,
+        "profile_picture": "http://127.0.0.1:8000/media/default.png",
+        "posts_count": 1
+    }
+}
+
+
+// User posts
+url: http://127.0.0.1:8000/api/v1/user-profile/9/post/
+// Result
+[
+    {
+        "url": "http://127.0.0.1:8000/api/v1/user-profile/9/post/2/",
+        "user": {
+            "id": 9,
+            "username": "pankaj",
+            "first_name": "Pankaj",
+            "last_name": "Chaurasia",
+            "email": "pankaj@gmail.com",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/9/profile/9/",
+                "followers_count": 1,
+                "following_count": 1,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 1
+            }
+        },
+        "image": "http://127.0.0.1:8000/media/user_9/Screenshot_5.png",
+        "caption": "Airplane Blueprint",
+        "likes_count": 3,
+        "comments_count": 1,
+        "created_at": "2019-12-23T07:04:14.333091Z"
+    }
+]
+
+// User feeds
+url: http://127.0.0.1:8000/api/v1/user-profile/9/feed/
+// Result
+[
+    {
+        "url": "http://127.0.0.1:8000/api/v1/user-profile/2/post/1/",
+        "user": {
+            "id": 2,
+            "username": "sameer",
+            "first_name": "Sameer",
+            "last_name": "sameer",
+            "email": "sameermahajan@ternaengg.ac.in",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/2/profile/2/",
+                "followers_count": 2,
+                "following_count": 2,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 1
+            }
+        },
+        "image": "http://127.0.0.1:8000/media/user_2/messager_-_dribbble_2x.png",
+        "caption": "With Great UI comes great responsibilities.",
+        "likes_count": 1,
+        "comments_count": 0,
+        "created_at": "2019-12-22T05:37:33.791680Z"
+    }
+]
+
+// User Likes
+url: http://127.0.0.1:8000/api/v1/user-profile/9/like/
+// Result
+[
+    {
+        "id": 4,
+        "post": {
+            "url": "http://127.0.0.1:8000/api/v1/user-profile/9/post/2/",
+            "user": {
+                "id": 9,
+                "username": "pankaj",
+                "first_name": "Pankaj",
+                "last_name": "Chaurasia",
+                "email": "pankaj@gmail.com",
+                "dob": null,
+                "profile": {
+                    "url": "http://127.0.0.1:8000/api/v1/user-profile/9/profile/9/",
+                    "followers_count": 1,
+                    "following_count": 1,
+                    "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                    "posts_count": 1
+                }
+            },
+            "image": "http://127.0.0.1:8000/media/user_9/Screenshot_5.png",
+            "caption": "Airplane Blueprint",
+            "likes_count": 3,
+            "comments_count": 1,
+            "created_at": "2019-12-23T07:04:14.333091Z"
+        },
+        "user": 9
+    },
+    {
+        "id": 5,
+        "post": {
+            "url": "http://127.0.0.1:8000/api/v1/user-profile/2/post/1/",
+            "user": {
+                "id": 2,
+                "username": "sameer",
+                "first_name": "Sameer",
+                "last_name": "sameer",
+                "email": "sameermahajan@ternaengg.ac.in",
+                "dob": null,
+                "profile": {
+                    "url": "http://127.0.0.1:8000/api/v1/user-profile/2/profile/2/",
+                    "followers_count": 2,
+                    "following_count": 2,
+                    "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                    "posts_count": 1
+                }
+            },
+            "image": "http://127.0.0.1:8000/media/user_2/messager_-_dribbble_2x.png",
+            "caption": "With Great UI comes great responsibilities.",
+            "likes_count": 1,
+            "comments_count": 0,
+            "created_at": "2019-12-22T05:37:33.791680Z"
+        },
+        "user": 9
+    }
+]
+
+// User Search
+url: http://127.0.0.1:8000/api/v1/search?user=vikas
+// Result
+[
+    {
+        "id": 3,
+        "username": "vikas",
+        "first_name": "",
+        "last_name": "",
+        "email": "",
+        "dob": null,
+        "profile": {
+            "url": "http://127.0.0.1:8000/api/v1/user-profile/3/profile/3/",
+            "followers_count": 1,
+            "following_count": 0,
+            "profile_picture": "http://127.0.0.1:8000/media/default.png",
+            "posts_count": 0
+        }
+    }
+]
+
+// User Followers
+url: http://127.0.0.1:8000/api/v1/user-profile/9/follower/
+// Result
+[
+    {
+        "id": 6,
+        "followee": {
+            "id": 9,
+            "username": "pankaj",
+            "first_name": "Pankaj",
+            "last_name": "Chaurasia",
+            "email": "pankaj@gmail.com",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/9/profile/9/",
+                "followers_count": 1,
+                "following_count": 1,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 1
+            }
+        },
+        "follower": {
+            "id": 2,
+            "username": "sameer",
+            "first_name": "Sameer",
+            "last_name": "sameer",
+            "email": "sameermahajan@ternaengg.ac.in",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/2/profile/2/",
+                "followers_count": 2,
+                "following_count": 2,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 1
+            }
+        }
+    }
+]
+
+// User following
+url: http://127.0.0.1:8000/api/v1/user-profile/9/following/
+// Result
+[
+    {
+        "id": 7,
+        "followee": {
+            "id": 1,
+            "username": "admin",
+            "first_name": "Saurabh",
+            "last_name": "Singh",
+            "email": "admin@test.com",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/1/profile/1/",
+                "followers_count": 1,
+                "following_count": 0,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 0
+            }
+        },
+        "follower": {
+            "id": 9,
+            "username": "pankaj",
+            "first_name": "Pankaj",
+            "last_name": "Chaurasia",
+            "email": "pankaj@gmail.com",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/9/profile/9/",
+                "followers_count": 1,
+                "following_count": 1,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 1
+            }
+        }
+    }
+]
+
+// Post Likes
+url: http://127.0.0.1:8000/api/v1/user-profile/9/post/2/like/
+// Result
+[
+    {
+        "id": 1,
+        "user": {
+            "id": 2,
+            "username": "sameer",
+            "first_name": "Sameer",
+            "last_name": "sameer",
+            "email": "sameermahajan@ternaengg.ac.in",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/2/profile/2/",
+                "followers_count": 2,
+                "following_count": 2,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 1
+            }
+        },
+        "post": 2
+    },
+    {
+        "id": 3,
+        "user": {
+            "id": 4,
+            "username": "saurabh",
+            "first_name": "",
+            "last_name": "",
+            "email": "srbhsingh39@gmail.com",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/4/profile/4/",
+                "followers_count": 0,
+                "following_count": 3,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 0
+            }
+        },
+        "post": 2
+    },
+    {
+        "id": 4,
+        "user": {
+            "id": 9,
+            "username": "pankaj",
+            "first_name": "Pankaj",
+            "last_name": "Chaurasia",
+            "email": "pankaj@gmail.com",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/9/profile/9/",
+                "followers_count": 1,
+                "following_count": 1,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 1
+            }
+        },
+        "post": 2
+    }
+]
+
+// Post Comment
+url: http://127.0.0.1:8000/api/v1/user-profile/9/post/2/comment/
+// Result
+[
+    {
+        "id": 2,
+        "user": {
+            "id": 9,
+            "username": "pankaj",
+            "first_name": "Pankaj",
+            "last_name": "Chaurasia",
+            "email": "pankaj@gmail.com",
+            "dob": null,
+            "profile": {
+                "url": "http://127.0.0.1:8000/api/v1/user-profile/9/profile/9/",
+                "followers_count": 1,
+                "following_count": 1,
+                "profile_picture": "http://127.0.0.1:8000/media/default.png",
+                "posts_count": 1
+            }
+        },
+        "text": "Hell Yeah! My own Comment",
+        "date_time": "2019-12-23T09:20:42.401631Z",
+        "post": 2
+    }
+]
