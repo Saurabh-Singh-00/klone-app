@@ -59,3 +59,17 @@ class Profile {
 
   Map<String, dynamic> toJson() => _$ProfileToJson(this);
 }
+
+@JsonSerializable(fieldRename: FieldRename.snake)
+class Following {
+  final int id;
+  final User followee;
+  final int follower;
+
+  Following({this.id, this.followee, this.follower});
+
+  factory Following.fromJson(Map<String, dynamic> json) =>
+      _$FollowingFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FollowingToJson(this);
+}

@@ -109,7 +109,7 @@ class _PostCardState extends State<PostCard>
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
             child: Text(
-              widget.post != null ? widget.post.caption : """""",
+              widget.post != null ? "${widget.post.caption}" : """""",
               style: TextStyle(
                 color: Colors.white70,
                 fontSize: 16.0,

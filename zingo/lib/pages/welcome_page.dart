@@ -109,7 +109,7 @@ class WelcomePage extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: Text(
-                              'Sign In',
+                              'Sign Up',
                               style: TextStyle(
                                 fontSize: 18.0,
                                 color: Colors.white,

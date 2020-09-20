@@ -56,6 +56,15 @@ class FeedSerializer(serializers.ModelSerializer):
 
 class UserLikeSerializer(serializers.ModelSerializer):
     # post = PostSerializer(read_only=True)
+    # user = UserSerializer(read_only=True)
+
+    class Meta:
+        model = models.Like
+        fields = ("id", "post", "user")
+
+class ActivitySerializer(serializers.ModelSerializer):
+    post = PostSerializer(read_only=True)
+    user = UserSerializer(read_only=True)
 
     class Meta:
         model = models.Like

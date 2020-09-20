@@ -16,6 +16,7 @@ class UserManager extends Manager {
   HashMap<int, int> likedPosts = HashMap<int, int>();
   HashMap<int, User> userFollowers = HashMap<int, User>();
   HashMap<int, User> userFollowing = HashMap<int, User>();
+  HashMap<int, Following> userFolloweeById = HashMap<int, Following>();
   List<Post> userPosts = [];
   API api = API();
   BehaviorSubject<User> user$ = BehaviorSubject<User>();
@@ -34,6 +35,9 @@ class UserManager extends Manager {
     await api.post(['logout'], {'token': Preferences.authToken},
         headers: api.getTokenAuthHeader(token: Preferences.authToken));
     await Preferences.deleteAuthToken('token');
+    userFollowers.clear();
+    userFollowing.clear();
+    userFolloweeById.clear();
   }
 
   void saveUserPosts(List<Post> posts) => this.userPosts.addAll(posts);
@@ -44,6 +48,7 @@ class UserManager extends Manager {
     fetchUserFeeds();
     fetchUserPosts();
     fetchUserFollowers();
+    fetchUserFollowing();
     explorePosts();
   }
 
@@ -124,7 +129,7 @@ class UserManager extends Manager {
     });
   }
 
-  Future addFollower(int followeeId) async {
+  Future addFollower(int followeeId, [User followee]) async {
     Map record = await api.post([
       'user-profile',
       this.user.id.toString(),
@@ -133,14 +138,43 @@ class UserManager extends Manager {
       'follower': this.user.id.toString(),
       'followee': followeeId.toString(),
     }, headers: api.getTokenAuthHeader(token: Preferences.authToken));
-    User user = User.fromJson(record['follower']);
+    Following followingResponse = Following(
+      id: record['id'],
+      followee: followee,
+      follower: this.user.id,
+    );
+    userFollowing.addAll({followeeId: followee});
+    userFolloweeById.addAll({followeeId: followingResponse});
   }
 
-  void fetchUserFollowing() {}
+  void fetchUserFollowing() async {
+    api.get(['user-profile', user.id.toString(), 'following'],
+        headers: api.getTokenAuthHeader(
+            token: Preferences.authToken)).then((following) {
+      print(following);
+      for (Map record in following as List) {
+        User followee = User.fromJson(record['followee']);
+        userFolloweeById.addAll({followee.id: Following.fromJson(record)});
+        userFollowing.addAll({followee.id: followee});
+      }
+    });
+    // print(userFollowing);
+  }
+
+  Future removeFollowing(int followeeId) async {
+    await api.delete([
+      'user-profile',
+      user.id.toString(),
+      'following',
+      userFolloweeById[followeeId].id.toString()
+    ], api.getTokenAuthHeader(token: Preferences.authToken));
+    userFollowing.remove(followeeId);
+    userFolloweeById.remove(followeeId);
+  }
 
   Future<List<User>> searchUser(String query) async {
-    Uri uri = Uri.http(
-        '${API.EMU_URL}:8000', 'api/v1/search/', {'user': '$query'});
+    Uri uri =
+        Uri.http('${API.EMU_URL}:8000', 'api/v1/search/', {'user': '$query'});
     http.Response response = await http.get(uri,
         headers: api.getTokenAuthHeader(token: Preferences.authToken));
     List _users = [];
@@ -190,6 +224,45 @@ class UserManager extends Manager {
       }
     });
     return posts;
+  }
+
+  Future<List<User>> fetchUserFollowingsById(int userId) async {
+    List<User> followings = <User>[];
+    await api.get(['user-profile', userId.toString(), 'following'],
+        headers: api.getTokenAuthHeader(
+            token: Preferences.authToken)).then((following) {
+      for (Map record in following as List) {
+        followings.add(User.fromJson(record['followee']));
+      }
+    });
+    // print(userFollowing);
+    return followings;
+  }
+
+  Future<List<User>> fetchUserFollowersById(int userId) async {
+    List<User> followings = <User>[];
+    await api.get(['user-profile', userId.toString(), 'follower'],
+        headers: api.getTokenAuthHeader(
+            token: Preferences.authToken)).then((following) {
+      for (Map record in following as List) {
+        followings.add(User.fromJson(record['follower']));
+      }
+    });
+    // print(userFollowing);
+    return followings;
+  }
+
+  Future<List> fetchActivitiesOnUserPost() async {
+    List<Map> activities = <Map>[];
+    await api.get(['user-profile', this.user.id.toString(), 'activity'],
+        headers: api.getTokenAuthHeader(
+            token: Preferences.authToken)).then((activity) {
+      for (Map record in activity as List) {
+        activities.add(record);
+      }
+    });
+    // print(userFollowing);
+    return activities;
   }
 
   @override

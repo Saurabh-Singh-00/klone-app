@@ -26,7 +26,7 @@ class FollowerViewSet(viewsets.ModelViewSet):
             followee__pk=self.kwargs['followee_pk'])
 
 
-class FollowingViewSet(viewsets.ReadOnlyModelViewSet):
+class FollowingViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.FollowingSerializer
 
     def get_queryset(self):

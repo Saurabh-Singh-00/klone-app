@@ -22,3 +22,6 @@
 
 # Ignore Video Folder
 video/
+
+# Ignore Virtual Environment
+venv/

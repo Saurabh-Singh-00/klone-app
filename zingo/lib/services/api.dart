@@ -37,7 +37,7 @@ class API {
     } catch (e) {
       throw "GET Request failed";
     }
-    return json.decode(response.body);
+    return json.decode(utf8.decode(response.bodyBytes));
   }
 
   Future post(List<String> params, Map body,

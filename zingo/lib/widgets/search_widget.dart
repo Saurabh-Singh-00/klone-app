@@ -11,11 +11,20 @@ class Search extends SearchDelegate {
   @override
   ThemeData appBarTheme(BuildContext context) {
     return Theme.of(context).copyWith(
+        textTheme: Theme.of(context)
+            .textTheme
+            .copyWith(headline6: TextStyle(color: Colors.white)),
+        inputDecorationTheme: InputDecorationTheme(
+          hintStyle: Theme.of(context)
+              .textTheme
+              .headline6
+              .copyWith(color: Colors.white),
+        ),
         appBarTheme: AppBarTheme.of(context).copyWith(
-      textTheme: TextTheme(
-          body1: TextStyle(color: Colors.white),
-          title: TextStyle(color: Colors.white)),
-    ));
+          textTheme: TextTheme(
+              bodyText1: TextStyle(color: Colors.white),
+              subtitle1: TextStyle(color: Colors.white)),
+        ));
   }
 
   @override
@@ -51,30 +60,36 @@ class Search extends SearchDelegate {
               child: Text("No such user!"),
             );
           }
-          return ListView.builder(
-            itemCount: snapshot.data.length,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return ListTile(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext _) => ProfileDetailPage(
-                                user: snapshot.data[index],
-                              )));
-                },
-                leading: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  backgroundImage: NetworkImage(
-                    snapshot.data[index].profile.profilePicture,
+          return Container(
+            color: Theme.of(context).primaryColorDark,
+            child: ListView.builder(
+              itemCount: snapshot.data.length,
+              physics: BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return ListTile(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext _) => ProfileDetailPage(
+                                  user: snapshot.data[index],
+                                )));
+                  },
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    backgroundImage: NetworkImage(
+                      snapshot.data[index].profile.profilePicture,
+                    ),
                   ),
-                ),
-                title: Text(
-                    "${snapshot.data[index].firstName} ${snapshot.data[index].lastName}"),
-                subtitle: Text("@${snapshot.data[index].username}"),
-              );
-            },
+                  title: Text(
+                    "${snapshot.data[index].firstName} ${snapshot.data[index].lastName}",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  subtitle: Text("@${snapshot.data[index].username}",
+                      style: TextStyle(color: Colors.white)),
+                );
+              },
+            ),
           );
         } else if (snapshot.hasError) {
           return Center(

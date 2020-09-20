@@ -19,39 +19,46 @@ class _FeedsTabState extends State<FeedsTab> {
       onRefresh: () async {
         userManager.fetchUserFeeds();
       },
-      child: Container(
-        child: StreamObserver<List<Post>>(
-          stream: userManager.userFeeds$.stream,
-          onSuccess: (context, List<Post> snapshot) {
-            if (snapshot.isEmpty) {
-              return RefreshIndicator(
-                onRefresh: () async {
-                  userManager.fetchUserFeeds();
-                },
-                child: Center(
-                  child: Text(
+      child: StreamObserver<List<Post>>(
+        stream: userManager.userFeeds$.stream,
+        onSuccess: (context, List<Post> snapshot) {
+          if (snapshot.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
                     "Follow more users to see feeds",
                     style: TextStyle(color: Colors.white),
                   ),
-                ),
-              );
-            }
-            return ListView.builder(
-                key: PageStorageKey('feeds_list'),
-                scrollDirection: Axis.vertical,
-                physics: BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: snapshot.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return PostCard(
-                    post: snapshot[index],
-                  );
-                });
-          },
-          onWaiting: (BuildContext context) => Center(
-            child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(Colors.deepOrangeAccent),
-            ),
+                  IconButton(
+                      icon: Icon(
+                        Icons.refresh,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        userManager.fetchUserFeeds();
+                      })
+                ],
+              ),
+            );
+          }
+          return ListView.builder(
+              key: PageStorageKey('feeds_list'),
+              scrollDirection: Axis.vertical,
+              physics: BouncingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: snapshot.length,
+              itemBuilder: (BuildContext context, int index) {
+                return PostCard(
+                  post: snapshot[index],
+                );
+              });
+        },
+        onWaiting: (BuildContext context) => Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation(Colors.deepOrangeAccent),
           ),
         ),
       ),

@@ -26,6 +26,10 @@ userlike_router = routers.NestedSimpleRouter(
     user_urls.user_router, 'user-profile', lookup='user')
 userlike_router.register('like', viewsets.UserLikeViewSet, base_name='like')
 
+activity_router = routers.NestedSimpleRouter(
+    user_urls.user_router, 'user-profile', lookup='user')
+activity_router.register('activity', viewsets.ActivityViewSet, base_name='activity')
+
 
 urlpatterns = [
     path('', include(post_router.urls)),
@@ -34,4 +38,5 @@ urlpatterns = [
     path('', include(like_router.urls)),
     path('', include(userlike_router.urls)),
     path('', include(explore_router.urls)),
+    path('', include(activity_router.urls)),
 ]

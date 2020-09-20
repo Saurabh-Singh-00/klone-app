@@ -5,6 +5,7 @@ import 'package:zingo/bloc/provider.dart';
 import 'package:zingo/managers/user_manager.dart';
 import 'package:zingo/models/post.dart';
 import 'package:zingo/models/user.dart';
+import 'package:zingo/pages/user_list_page.dart';
 import 'package:zingo/widgets/post_card.dart';
 
 class ProfileDetailPage extends StatefulWidget {
@@ -71,7 +72,20 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
                           padding: EdgeInsets.symmetric(vertical: 8.0),
                           child: Container(
                             child: RaisedButton(
-                              onPressed: () {},
+                              onPressed: userManager.userFollowing
+                                      .containsKey(widget.user.id)
+                                  ? () async {
+                                      await userManager
+                                          .removeFollowing(widget.user.id);
+                                      setState(() {});
+                                    }
+                                  : () async {
+                                      await userManager.addFollower(
+                                        widget.user.id,
+                                        widget.user,
+                                      );
+                                      setState(() {});
+                                    },
                               color: Colors.white,
                               splashColor: Colors.white70,
                               shape: RoundedRectangleBorder(
@@ -83,7 +97,7 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 8.0),
                                 child: Text(
-                                  userManager.userFollowers
+                                  userManager.userFollowing
                                           .containsKey(widget.user.id)
                                       ? 'Unfollow'
                                       : 'Follow',
@@ -111,13 +125,39 @@ class _ProfileDetailPageState extends State<ProfileDetailPage> {
                       data: widget.user.profile.postsCount,
                       label: "Posts",
                     ),
-                    UserStats(
-                      data: widget.user.profile.followersCount,
-                      label: "Followers",
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => UserListPage(
+                              appBarTitle: "Followers",
+                              type: "follower",
+                              userId: widget.user.id,
+                            ),
+                          ),
+                        );
+                      },
+                      child: UserStats(
+                        data: widget.user.profile.followersCount,
+                        label: "Followers",
+                      ),
                     ),
-                    UserStats(
-                      data: widget.user.profile.followingCount,
-                      label: "Following",
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => UserListPage(
+                              appBarTitle: "Followings",
+                              type: "following",
+                              userId: widget.user.id,
+                            ),
+                          ),
+                        );
+                      },
+                      child: UserStats(
+                        data: widget.user.profile.followingCount,
+                        label: "Following",
+                      ),
                     ),
                   ],
                 ),

@@ -8,6 +8,7 @@ import 'package:zingo/bloc/provider.dart';
 import 'package:zingo/managers/user_manager.dart';
 import 'package:zingo/models/post.dart';
 import 'package:zingo/models/user.dart';
+import 'package:zingo/pages/user_list_page.dart';
 import 'package:zingo/widgets/post_card.dart';
 import 'package:zingo/widgets/stream_observer.dart';
 
@@ -115,17 +116,43 @@ class _ProfileTabState extends State<ProfileTab> {
                         : 0,
                     label: "Posts",
                   ),
-                  UserStats(
-                    data: userManager.user != null
-                        ? userManager.user.profile.followersCount
-                        : 0,
-                    label: "Followers",
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => UserListPage(
+                            appBarTitle: "Followers",
+                            type: "follower",
+                            userId: userManager.user.id,
+                          ),
+                        ),
+                      );
+                    },
+                    child: UserStats(
+                      data: userManager.user != null
+                          ? userManager.user.profile.followersCount
+                          : 0,
+                      label: "Followers",
+                    ),
                   ),
-                  UserStats(
-                    data: userManager.user != null
-                        ? userManager.user.profile.followingCount
-                        : 0,
-                    label: "Following",
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => UserListPage(
+                            appBarTitle: "Followings",
+                            type: "following",
+                            userId: userManager.user.id,
+                          ),
+                        ),
+                      );
+                    },
+                    child: UserStats(
+                      data: userManager.user != null
+                          ? userManager.user.profile.followingCount
+                          : 0,
+                      label: "Following",
+                    ),
                   ),
                 ],
               ),

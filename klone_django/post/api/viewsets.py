@@ -35,7 +35,7 @@ class FeedsViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticated,)
 
     def get_queryset(self):
-        return models.Post.objects.filter(user__pk__in=Following.objects.filter(followee=self.request.user).values_list('follower')).order_by("-created_at")
+        return models.Post.objects.filter(user__pk__in=Following.objects.filter(follower=self.request.user).values_list('followee')).order_by("-created_at")
 
 
 class UserLikeViewSet(viewsets.ModelViewSet):
@@ -52,3 +52,11 @@ class ExploreViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self, *args, **kwargs):
         return models.Post.objects.all().exclude(user=self.request.user)
+
+class ActivityViewSet(viewsets.ModelViewSet):
+    serializer_class = serializers.ActivitySerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self, *args, **kwargs):
+        return models.Like.objects.filter(post__user=self.request.user)
+    

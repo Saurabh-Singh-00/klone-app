@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:zingo/bloc/bloc.dart';
 import 'package:zingo/bloc/provider.dart';
 import 'package:zingo/managers/user_manager.dart';
+import 'package:zingo/pages/tabs/activity_tab.dart';
 import 'package:zingo/pages/tabs/feeds_tab.dart';
 import 'package:zingo/pages/tabs/profile_tab.dart';
 import 'package:zingo/pages/tabs/search_tab.dart';
@@ -17,10 +18,10 @@ class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController tabController;
   UserManager userManager;
-  List<String> pageTitle = ['Feeds', 'Search', 'Camera', 'Activity', 'Profile'];
+  List<String> pageTitle = ['Feeds', 'Search', 'Camera', 'Likes', 'Profile'];
   @override
   void initState() {
-    tabController = TabController(vsync: this, length: 5, initialIndex: 0);
+    tabController = TabController(vsync: this, length: pageTitle.length, initialIndex: 0);
     super.initState();
   }
 
@@ -53,7 +54,7 @@ class _HomePageState extends State<HomePage>
           FeedsTab(),
           SearchTab(),
           Container(),
-          Container(),
+          ActivityTab(),
           ProfileTab(),
         ],
       ),

@@ -47,3 +47,19 @@ Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{
       'profile_picture': instance.profilePicture,
       'posts_count': instance.postsCount,
     };
+
+Following _$FollowingFromJson(Map<String, dynamic> json) {
+  return Following(
+    id: json['id'] as int,
+    followee: json['followee'] == null
+        ? null
+        : User.fromJson(json['followee'] as Map<String, dynamic>),
+    follower: json['follower'] as int,
+  );
+}
+
+Map<String, dynamic> _$FollowingToJson(Following instance) => <String, dynamic>{
+      'id': instance.id,
+      'followee': instance.followee,
+      'follower': instance.follower,
+    };
