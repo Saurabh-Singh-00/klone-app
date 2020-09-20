@@ -5,9 +5,9 @@
 ### Folder Structure📂
 1. First fork the project in your account
 2. Clone your forked repo of the Project
-3. `git clone https://<your-username>@bitbucket.org/<your-username>/t2-cs-05.git`
-4. A directory called **t2-cs-05** will be created
-5. Navigate to t2-cs-05 directory `cd t2-cs-05`
+3. `git clone https://<your-username>@github.com/<your-username>/klone-app.git`
+4. A directory called **klone-app** will be created
+5. Navigate to t2-cs-05 directory `cd klone-app`
 5. Setup the Environment now. Follow the Steps Below👇
 
 
@@ -44,8 +44,8 @@
 [![Preview](/screenshots/1.JPG)](https://drive.google.com/file/d/11iu9TNcVNCVRa6kbfDUPSoqv0tABLpmI/view?usp=sharing "Preview")
 ### Click on the ☝ above image to watch video
 
-| ![](/screenshots/1.JPG) | ![](/screenshots/2.JPG) | ![](/screenshots/3.JPG) | ![](/screenshots/4.JPG) |
-| ![](/screenshots/5.JPG) | ![](/screenshots/6.JPG) | ![](/screenshots/7.JPG) | ![](/screenshots/8.JPG) |
-| ![](/screenshots/9.JPG) | ![](/screenshots/10.JPG) | ![](/screenshots/11.JPG) | ![](/screenshots/12.JPG) |
-| ![](/screenshots/13.JPG) | ![](/screenshots/14.JPG) |
+![](/screenshots/1.JPG) ![](/screenshots/2.JPG) ![](/screenshots/3.JPG) ![](/screenshots/4.JPG)
+![](/screenshots/5.JPG) ![](/screenshots/6.JPG) ![](/screenshots/7.JPG) ![](/screenshots/8.JPG) 
+![](/screenshots/9.JPG) ![](/screenshots/10.JPG) ![](/screenshots/11.JPG) ![](/screenshots/12.JPG) |
+![](/screenshots/13.JPG) ![](/screenshots/14.JPG)
 
